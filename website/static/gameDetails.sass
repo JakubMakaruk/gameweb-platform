@@ -1,0 +1,180 @@
+$yellow: #ffeb3b
+
+header
+  width: 100%
+  position: relative
+
+  nav
+    height: 100px
+    line-height: 100px
+    box-shadow: none
+    top: 0
+    z-index: 1
+    transition: background-color .3s ease
+
+    ul
+      margin-right: 60px
+
+      li
+        width: 200px
+        text-align: center
+
+        a
+          transition: color .5s ease
+
+        .active
+          color: $yellow
+
+      li:hover:not(:last-child)
+        background-color: rgba(0, 0, 0, .4)
+
+      .btn-login
+        margin-left: 50px
+        width: 150px
+
+    .brand-logo
+      font-family: 'Staatliches', cursive
+      font-size: 2.5rem
+      margin-left: 60px
+      font-weight: 700
+      color: #fff
+      letter-spacing: 2px
+      transition: color .3s ease
+
+      i
+        float: none
+        font-size: 30px
+
+    .brand-logo:hover
+      color: $yellow
+
+  #dropdownAccount
+    a
+      color: #000
+      font-size: 1rem
+      text-align: right
+
+
+#section-content
+  height: calc(100vh - 100px)
+  width: 70%
+  margin: 0 auto
+
+  .game
+    padding: 40px 0 20px
+    .game-details
+      display: flex
+      justify-content: space-between
+      margin-bottom: 30px
+
+      .game-header
+        display: flex
+        gap: 20px
+
+        img
+          border: 2px solid black
+
+        h1
+          margin: 0 0 20px
+          font-family: "Staatliches", cursive
+
+      .rate
+        display: flex
+        flex-direction: column
+        justify-content: center
+        text-align: center
+
+        .star-icon
+          color: $yellow
+          font-size: 60px
+
+        .rate-value
+          font-family: "Staatliches", cursive
+          font-size: 40px
+
+        .btn-add-rate
+          margin-top: 40px
+          background: $yellow
+          width: 100px
+          line-height: 36px
+
+    .game-description
+      h3
+        margin: 0 0 10px
+        font-family: "Staatliches", cursive
+
+    .game-comments
+      margin-top: 20px
+      .game-comments-header
+        display: flex
+        justify-content: space-between
+        align-items: center
+        h3
+          font-family: "Staatliches", cursive
+        .btn-add-comment
+          margin: 30px 0 10px
+      .comments
+        .collection
+          padding: 20px
+          .comment-header
+            display: flex
+            gap: 20px
+            justify-content: space-between
+            margin-bottom: 10px
+            p, span
+              font-size: .8rem
+            .comment-author
+              span
+                font-weight: 700
+          .comment-content
+            padding: 0 10px
+
+      .btn-add-comment
+        background: $yellow
+
+
+#modalAddRate
+  text-align: center
+
+  h3
+    font-family: "Staatliches", cursive
+
+  .stars
+    display: flex
+    flex-direction: row-reverse
+    justify-content: center
+
+    button
+      color: #1d1d1d
+      background: none
+      box-shadow: none
+      border: none
+
+      i
+        font-size: 60px
+        cursor: pointer
+
+      .star-value
+        font-size: .8rem
+
+    button:hover, button:hover ~ button
+      color: $yellow
+
+
+#modalAddComment
+  text-align: center
+  h3
+    font-family: "Staatliches", cursive
+  .input-field textarea:focus + label
+    color: #dd2c00
+  .input-field textarea:focus
+    border-bottom: 1px solid #dd2c00
+    box-shadow: 0 1px 0 0 #dd2c00
+  .input-field .prefix.active
+    color: #dd2c00
+
+
+.btn-yellow
+  color: #000
+  font: 400 1.2rem 'Staatliches', cursive
+  line-height: 54px

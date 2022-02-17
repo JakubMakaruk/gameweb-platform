@@ -1,0 +1,512 @@
+$yellow: #ffeb3b
+$dark-black: #333333
+$facebook-color: #3b5998
+$linkedin-color: #0e76a8
+
+
+header
+    height: 100vh
+    width: 100%
+    position: relative
+
+    nav
+        position: fixed
+        height: 100px
+        line-height: 100px
+        box-shadow: none
+        top: 0
+        z-index: 1
+        transition: background-color .3s ease
+        ul
+            margin-right: 60px
+            li
+                width: 200px
+                text-align: center
+                a
+                    transition: color .5s ease
+                .active
+                    color: $yellow
+            li:hover:not(:last-child)
+                background-color: rgba(0, 0, 0, .4)
+            .btn-login
+                margin-left: 50px
+                width: 150px
+        .brand-logo
+            font-family: 'Staatliches', cursive
+            font-size: 2.5rem
+            margin-left: 60px
+            font-weight: 700
+            color: #fff
+            letter-spacing: 2px
+            transition: color .3s ease
+            i
+                float: none
+                font-size: 30px
+        .brand-logo:hover
+            color: $yellow
+    #modalLoginRegister
+        overflow: hidden
+        width: 20%
+        padding: 30px
+        #login-modal
+            display: block
+        #register-modal
+            display: none
+        .modal-content
+            padding: 30px 0 0 0
+            display: flex
+            flex-direction: column
+            justify-content: center
+            align-items: center
+            h4
+                font-family: "Staatliches", cursive
+                font-size: 3rem
+                margin-bottom: 40px
+            .question-text
+                margin-top: 10px
+                font-size: 0.8rem
+                color: #1d1d1d
+            .switch-panel-text
+                margin: 15px 0 10px
+                padding: 5px 7px
+                color: #1d1d1d
+                font-weight: 700
+                font-size: 16px
+                cursor: pointer
+                transition: color .3s ease, transform .3s ease
+            .switch-panel-text:hover
+                transform: scale(1.1)
+                color: #dd2c00
+        .modal-footer
+            text-align: left
+            display: flex
+            justify-content: space-between
+            .btn-red:hover
+                background: #ffd2ca
+            .btn-green:hover
+                background: #c2efad
+
+    #dropdownAccount
+        a
+            color: #000
+            font-size: 1rem
+            text-align: right
+
+    .carousel
+        height: 100%
+        width: 100%
+
+        .carousel-slide
+            height: 100%
+            width: 500%
+            position: relative
+
+            input
+                pointer-events: all
+
+            .fade-panel
+                height: 100%
+                width: 100%
+                position: absolute
+                background-color: rgba(0,0,0,.4)
+                z-index: 10
+
+            .images
+                height: 100%
+                display: flex
+
+                .slide
+                    height: 100%
+                    width: 20%
+                    transition: margin 2s ease-in-out
+
+                img
+                    height: 100%
+                    width: 100%
+
+        .navigation-manual
+            z-index: 50
+            position: absolute
+            top: 50%
+            left: 2%
+            transform: translateY(-50%)
+            display: flex
+            flex-direction: column
+
+            counter-reset: manual-btn-counter
+
+            .manual-btn
+                position: relative
+                height: 150px
+                border-left: 5px solid #fff
+                padding-right: 40px
+                margin-bottom: 3px
+                cursor: pointer
+                transition: border-color .3s ease
+                &:after
+                    counter-increment: manual-btn-counter
+                    content: counter(manual-btn-counter)
+                    font-size: 1.3rem
+                    font-weight: 700
+                    color: #fff
+                    position: absolute
+                    bottom: 0
+                    left: 10px
+                    transition: color .3s ease
+                &:hover
+                    border-left-color: #f7ffac
+                    &:after
+                        color: #f7ffac
+    .header-content
+        position: absolute
+        top: 50%
+        left: 15%
+        transform: translateY(-50%)
+        color: #000
+        display: flex
+        flex-direction: column
+        align-items: center
+        .header-content-text
+            h1
+                font: 700 8rem 'Staatliches', cursive
+                color: #fff
+                margin: 0
+        .btn-start-explore
+            margin-top: 30px
+            width: 200px
+
+.btn-yellow
+    color: #000
+    font: 400 1.2rem 'Staatliches', cursive
+    line-height: 54px
+
+#radio1:checked
+    ~ .navigation-manual
+        .manual-btn-1
+            border-width: 0 7px 0 7px
+            border-color: $yellow
+
+            &:after
+                color: $yellow
+    ~ .images
+        .first
+            margin-left: 0
+
+#radio2:checked
+    ~ .navigation-manual
+        .manual-btn-2
+            border-width: 0 7px 0 7px
+            border-color: $yellow
+
+            &:after
+                color: $yellow
+    ~ .images
+        .first
+            margin-left: -20%
+
+#radio3:checked
+    ~ .navigation-manual
+        .manual-btn-3
+            border-width: 0 7px 0 7px
+            border-color: $yellow
+
+            &:after
+                color: $yellow
+
+    ~ .images
+        .first
+            margin-left: -40%
+
+#radio4:checked
+    ~ .navigation-manual
+        .manual-btn-4
+            border-width: 0 7px 0 7px
+            border-color: $yellow
+
+            &:after
+                color: $yellow
+    ~ .images
+        .first
+            margin-left: -60%
+
+// SECTION ABOUT US
+#section-aboutus
+    color: $dark-black
+    width: 100%
+    display: flex
+    align-items: center
+    flex-direction: column
+    .title
+        width: 300px
+        border-bottom: 2px solid $yellow
+        .about-us-title
+            margin: 40px 0 10px
+            text-align: center
+            font: 400 3rem 'Staatliches', cursive
+    .content
+        margin: 20px 0 40px
+        width: 70%
+        text-align: center
+        .cards
+            margin-top: 40px
+            display: flex
+            justify-content: center
+            gap: 50px
+            .card-panel
+                width: 300px
+                display: flex
+                flex-direction: column
+                .card-icon
+                    margin: 20px 0
+                    height: 20%
+                    i
+                        color: $yellow
+                        font-size: 35px
+                .card-title
+                    font: 400 1.5rem 'Staatliches', cursive
+                    margin-bottom: 30px
+                .card-description
+                    margin-bottom: 20px
+                    font-size: .9rem
+
+#section-news
+    //height: 70vh
+    background: #1d1d1d
+    .news-container
+        margin: 0 auto
+        padding-bottom: 60px !important
+        width: 80%
+        // display: flex
+        // flex-direction: column
+        // align-items: center
+        .title
+            color: #fff
+            width: 300px
+            .news-title
+                padding: 40px 0 20px
+                text-align: center
+                font: 400 3rem 'Staatliches', cursive
+        .tabs
+            background-color: transparent
+            overflow: hidden
+            margin-bottom: 20px
+            .tab
+                width: 25%
+                background: #292929
+                a
+                    color: #fff
+                .active
+                    font-weight: 700
+                a:focus
+                    background: transparent
+                    .active
+                        background: transparent
+            .indicator
+                background-color: $yellow
+        .news
+            .active
+                display: flex !important
+        .news-content
+            flex-direction: column
+            .news-title
+                color: $yellow
+                h4
+                    font-family: 'Bebas Neue', cursive
+                    letter-spacing: 1px
+                    font-weight: 700
+            .news-data
+                margin-top: 20px
+                display: flex
+                gap: 5%
+                .news-description
+                    width: 60%
+                    .description
+                        color: #ffffff
+                    .btn-read-more
+                        line-height: 36px
+                        margin-top: 30px
+                .news-image
+                    width: 35%
+                    img
+                        border: 2px solid $yellow
+                        width: 100%
+
+footer
+    margin: 0 auto
+    padding: 30px 0 50px
+    //height: 100vh
+    width: 80%
+
+    .footer-content
+        display: flex
+        justify-content: center
+        flex-wrap: wrap
+        gap: 5%
+    .left, .middle, .right
+        width: 30%
+        min-width: 200px
+
+    .left
+        //background: #f7ffac
+        .brand-logo
+            font-family: 'Staatliches', cursive
+            font-size: 2.5rem
+            margin-left: 20px
+            font-weight: 700
+            color: #1d1d1d
+            letter-spacing: 2px
+            transition: color .3s ease
+            i
+                float: none
+                font-size: 30px
+        .brand-logo:hover
+            color: $yellow
+        p
+            margin-top: 15px
+            font-size: 1rem
+    .middle
+        //background: #a53e52
+        h5
+            //font-weight: 700
+            font-family: "Staatliches", cursive
+        .middle-content
+            .socials
+                margin-top: 15px
+                display: flex
+                justify-content: space-around
+                i
+                    font-size: 40px
+                    cursor: pointer
+                .fa-facebook-square:hover
+                    color: $facebook-color
+                .fa-instagram-square:hover
+                    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%)
+                    -webkit-background-clip: text
+                    -webkit-text-fill-color: transparent
+                .fa-linkedin:hover
+                    color: $linkedin-color
+                .fa-steam-square:hover
+                    background: linear-gradient(#0F1C30, #1383B4)
+                    -webkit-background-clip: text
+                    -webkit-text-fill-color: transparent
+
+            .discord
+                width: 70%
+                margin: 20px auto 0
+                padding: 5px 10px
+                border-radius: 30px
+                cursor: pointer
+                transition: background .5s ease, color .5s ease
+                p
+                    font-size: 1.2rem
+                    //font-weight: 700
+                    font-family: "Staatliches", cursive
+                    text-align: center
+                    i
+                        font-size: 20px
+                        padding-left: 10px
+            .discord:hover
+                background: #738ADB
+                color: #fff
+    .right
+        h5
+            //font-weight: 700
+            font-family: "Staatliches", cursive
+        .links
+            display: flex
+            flex-direction: column
+            a
+                margin: 0 0 10px 30px
+                color: black
+                position: relative
+            a:before
+                content: '>'
+                position: absolute
+                top: 50%
+                left: -30px
+                transition: left .3s ease
+                transform: translateY(-50%)
+            a:hover
+                font-weight: 700
+            a:hover:before
+                left: -15px
+
+    hr
+        margin: 20px 0
+        width: 100%
+    .footer-copyright
+        p, span
+            font-size: .9rem
+
+
+.materialert
+    position: absolute
+    top: 10%
+    left: 50%
+    transform: translateX(-50%)
+    z-index: 10
+    min-width: 600px
+    padding: 15px
+    margin-bottom: 20px
+    margin-top: 15px
+    border: 1px solid transparent
+    border-radius: 4px
+    transition: all 0.1s linear
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2)
+    display: -webkit-box
+    display: -webkit-flex
+    display: -ms-flexbox
+    display: flex
+    -webkit-box-align: center
+    -webkit-align-items: center
+    -ms-flex-align: center
+    align-items: center
+    transition: visibility .3s ease, opacity .3s ease
+
+.materialert
+    .material-icons
+        margin-right: 10px
+
+.materialert
+    .close-alert
+        -webkit-appearance: none
+        border: 0
+        cursor: pointer
+        color: inherit
+        background: 0 0
+        font-size: 22px
+        line-height: 20px
+        font-weight: bold
+        text-shadow: 0 1px 0 rgba(255, 255, 255, .7)
+        filter: alpha(opacity=40)
+        margin-bottom: -5px
+        position: absolute
+        top: 16px
+        right: 15px
+
+.materialert.info
+    background-color: #039be5
+    color: #fff
+
+.materialert.success
+    background-color: #43a047
+    color: #fff
+
+.materialert.error
+    background-color: #c62828
+    color: #fff
+
+.materialert.danger
+    background-color: #c62828
+    color: #fff
+
+.materialert.warning
+    background-color: #fbc02d
+    color: #fff
+
+
+
+.shadow-bg
+    background-color: rgba(0, 0, 0, .9)
+
+

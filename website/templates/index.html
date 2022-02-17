@@ -1,0 +1,575 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block styles %}
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
+<link rel="stylesheet" href="{% static 'css/shared.css' %}">
+{% endblock %}
+
+{% block content %}
+<header id="home" class="scrollspy">
+    <nav class="transparent">
+        <a href="#" class="brand-logo"><i class="fas fa-gamepad"></i> GAMEWEB</a>
+        <ul class="right">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#section-aboutus">About us</a></li>
+            <li><a href="#section-news">News</a></li>
+            {% if user.is_authenticated %}
+            <li><a href="{% url 'forum' %}">Forum</a></li>
+            {% endif %}
+            <li><a
+                    {% if user.is_authenticated %}
+                        data-target="dropdownAccount"
+                    {% else %}
+                        href="#modalLoginRegister"
+                    {% endif %}
+                    class=" {% if user.is_authenticated %} dropdown-account {% endif %}
+                    btn-login btn-yellow waves-effect waves-light yellow btn-large modal-trigger">
+                {% if user.is_authenticated %}
+                    My account
+                {% else %}
+                    Login
+                {% endif%}
+            </a></li>
+        </ul>
+    </nav>
+
+    {% for message in messages %}
+    <div class="materialert {{ message.tags }}">
+        <i class="material-icons">error_outline</i> <span>{{ message }}</span>
+        <button type="button" class="close-alert" onclick="closeAlert(this)">×</button>
+    </div>
+    {% endfor %}
+
+
+    <ul id='dropdownAccount' class='dropdown-content'>
+        <li><a href="#!">SETTINGS</a></li>
+        <li class="divider" tabindex="-1"></li>
+        <li><a href="{% url 'logoutPage' %}">LOGOUT</a></li>
+    </ul>
+
+    <div id="modalLoginRegister" class="modal">
+        <div id="login-modal">
+            <form action="{% url 'loginPage' %}" method="POST" id="loginForm">
+                {% csrf_token %}
+                <div class="modal-content">
+                    <h4>SIGN IN</h4>
+
+                    <div class="input-field">
+                        <i class="material-icons prefix">account_circle</i>
+                        <input id="login" type="text" name="loginLogin">
+                        <label for="login">Login</label>
+                    </div>
+                    <div class="input-field">
+                        <i class="material-icons prefix">key</i>
+                        <input id="password" type="password" name="passwordLogin">
+                        <label for="password">Password</label>
+                    </div>
+
+                    <p class="question-text">Don't have an account?</p>
+                    <a class="switch-panel-text" onclick="switchPanel('register')">Click here to create new account</a>
+                </div>
+                <div class="modal-footer">
+                    <a class="modal-close waves-effect waves-red btn-flat btn-red">Back</a>
+                    <button type="submit" class="waves-effect waves-green btn-flat btn-green">Login</button>
+                </div>
+            </form>
+        </div>
+        <div id="register-modal">
+            <form action="{% url 'registerPage' %}" method="POST" id="registerForm">
+                {% csrf_token %}
+                <div class="modal-content">
+                    <h4>SIGN UP</h4>
+                    <div class="input-field">
+                        {{ form.loginRegister.errors }}
+                        <input id="loginRegister" type="text" class="" name="loginRegister">
+                        <label for="loginRegister">Login</label>
+                    </div>
+                    <div class="input-field">
+                        <input id="emailRegister" type="text" class="" name="emailRegister">
+                        <label for="emailRegister">E-mail</label>
+                    </div>
+                    <div class="input-field">
+                        <input id="passwordRegister" type="password" class="" name="passwordRegister">
+                        <label for="passwordRegister">Password</label>
+                    </div>
+                    <div class="input-field">
+                        <input id="repeatPasswordRegister" type="password" class="" name="repeatPasswordRegister">
+                        <label for="repeatPasswordRegister">Repeat password</label>
+                    </div>
+
+                    <p class="question-text">Already have an account?</p>
+                    <a class="switch-panel-text" onclick="switchPanel('login')">Return to sign in panel</a>
+                </div>
+                <div class="modal-footer">
+                    <a class="modal-close waves-effect waves-red btn-flat btn-red">Back</a>
+                    <button type="submit" class="waves-effect waves-green btn-flat btn-green">Create
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="carousel">
+        <div class="carousel-slide">
+            <input type="radio" name="radio-btn" id="radio1">
+            <input type="radio" name="radio-btn" id="radio2">
+            <input type="radio" name="radio-btn" id="radio3">
+            <input type="radio" name="radio-btn" id="radio4">
+
+            <div class="images">
+                <div class="fade-panel"></div>
+                <div class="slide first">
+                    <img src="{% static 'images/slider-images/1.jpg' %}">
+                </div>
+                <div class="slide">
+                    <img
+                            src="{% static 'images/slider-images/2.jpg' %}">
+                </div>
+                <div class="slide">
+                    <img src="{% static 'images/slider-images/3.jpg' %}">
+                </div>
+                <div class="slide">
+                    <img src="{% static 'images/slider-images/4.jpg' %}">
+                </div>
+            </div>
+
+            <div class="navigation-manual">
+                <label for="radio1" class="manual-btn manual-btn-1"></label>
+                <label for="radio2" class="manual-btn manual-btn-2"></label>
+                <label for="radio3" class="manual-btn manual-btn-3"></label>
+                <label for="radio4" class="manual-btn manual-btn-4"></label>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-content">
+        <div class="header-content-text">
+            <h1>EXPLORE</h1>
+            <h1>GAMEWEB</h1>
+        </div>
+        <a class="btn-start-explore btn-yellow waves-effect waves-light yellow btn-large">Start explore</a>
+    </div>
+</header>
+
+<section id="section-aboutus" class=" scrollspy">
+    <div class="title">
+        <p class="about-us-title">ABOUT US</p>
+    </div>
+    <div class="content">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae animi officia veritatis? Iste eaque
+            repellat dolor laborum consequatur error animi labore eligendi nobis minima harum totam cum, corrupti fugit
+            id dolores nisi maiores nesciunt quia tempore odio magnam. Provident distinctio minima, hic, quas
+            perferendis error rem fugit sed labore obcaecati voluptatum? Cupiditate quos voluptatem iusto similique
+            esse, hic harum modi!</p>
+        <div class="cards">
+            <div class="card-panel">
+                <div class="card-icon">
+                    <i class="fas fa-gamepad"></i>
+                </div>
+                <div class="card-title">
+                    FEATURED GAMES
+                </div>
+                <div class="card-description">
+                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quos, labore!
+                </div>
+            </div>
+            <div class="card-panel">
+                <div class="card-icon">
+                    <i class="fas fa-user-edit"></i>
+                </div>
+                <div class="card-title">
+                    REVIEWS
+                </div>
+                <div class="card-description">
+                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quos, labore!
+                </div>
+            </div>
+            <div class="card-panel">
+                <div class="card-icon">
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class="card-title">
+                    RATING
+                </div>
+                <div class="card-description">
+                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quos, labore!
+                </div>
+            </div>
+            <div class="card-panel">
+                <div class="card-icon">
+                    <i class="fas fa-comments"></i>
+                </div>
+                <div class="card-title">
+                    COMMENT
+                </div>
+                <div class="card-description">
+                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quos, labore!
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="section-news" class="scrollspy">
+    <div class="news-container">
+        <div class="title">
+            <p class="news-title">NEWS</p>
+        </div>
+        <ul class="tabs">
+            <li class="tab">
+                <a href="#news1" class="">News 1</a>
+            </li>
+            <li class="tab">
+                <a href="#news2" class="">News 2</a>
+            </li>
+            <li class="tab">
+                <a href="#news3" class="">News 3</a>
+            </li>
+            <li class="tab">
+                <a href="#news4" class="">News 4</a>
+            </li>
+        </ul>
+        <div class="news">
+            <div class="news-content" id="news1">
+                <div class="news-title">
+                    <h4>Microsoft will soon begin automatically cancelling dormant Game Pass subscriptions</h4>
+                </div>
+                <div class="news-data">
+                    <div class="news-description">
+                        <p class="description">
+                            Following an investigation by the UK's Competition and Markets Authority, Microsoft has said it will make changes to its Game Pass program that will
+                            make it easier for subscribers to cancel the service, and will stop taking payments for subscriptions that go dormant.
+                            <br><br>
+                            The CMA said that it first "identified concerns about certain features of Microsoft’s auto-renewing subscriptions" as part of a wider investigation into
+                            online gaming. Those concerns included clarity about automatic subscription renewal, ease of disabling automatic renewals, and whether customers may be
+                            unwittingly paying for old subscriptions that they were no longer using.
+                        </p>
+                        <a href="#modal1"
+                           class="btn yellow btn-yellow btn-medium btn-read-more modal-trigger">READ
+                            MORE
+                        </a>
+                        <div id="modal1" class="modal modal-news">
+                            <div class="modal-content">
+                                <p>Following an investigation by the UK's Competition and Markets Authority, Microsoft has said it will make changes to its Game Pass program that
+                                    will make it easier for subscribers to cancel the service, and will stop taking payments for subscriptions that go dormant.
+                                    <br><br>
+                                    The CMA said that it first "identified concerns about certain features of Microsoft’s auto-renewing subscriptions" as part of a wider
+                                    investigation into online gaming. Those concerns included clarity about automatic subscription renewal, ease of disabling automatic renewals,
+                                    and whether customers may be unwittingly paying for old subscriptions that they were no longer using.
+                                    <br><br>
+                                    As a result, Microsoft has now committed to making changes to its Game Pass and Xbox Live services, including:
+                                    <br><br>
+                                    Better upfront information: Microsoft will provide more transparent, upfront information to help customers understand their Xbox
+                                    membership—making clear, for example, that the subscription will auto-renew unless the customer turns off auto-renewal; when the subscription
+                                    will auto-renew; how much it will cost; and how the customer can receive a refund after an accidental renewal.
+                                    Refunds: Microsoft will contact existing customers on recurring 12-month contracts and give them the option to end their contract and claim a
+                                    pro-rata refund.
+                                    Inactive memberships: Microsoft will also contact existing customers who haven’t used their memberships for a long time but are still paying.
+                                    These customers will be reminded how to stop payments, and if they continue not to use their memberships, Microsoft will ultimately stop taking
+                                    further payments.
+                                    Better information about price increases: Microsoft will give clearer notifications of any future price rises, and will ensure people know how
+                                    to turn off auto-renewal if they don’t want to pay the higher price.
+                                    "Gamers need to be given clear and timely information to make informed choices when signing up for auto-renewing memberships and subscriptions,"
+                                    CMA executive director of enforcement Michael Grenfell said. "We are therefore pleased that Microsoft has given the CMA these formal
+                                    undertakings to improve the fairness of their practices and protect consumers, and will be offering refunds to certain customers."
+                                    <br><br>
+                                    Grenfell also warned that other companies offering subscriptions based services "should take note and review their practices to ensure they
+                                    comply with consumer protection law."
+                                    <br><br>
+                                    It's a situation a lot of us have likely been in at least once in our lives: Paying for services we're not using for months on end, because
+                                    we've forgotten about them or it's just too much of a pain in the ass to cancel on the rare occasions that they come to mind. Either way, it's
+                                    money wasted, and while the CMA announcement is short on specifics—there's no indication as to exactly how long "a long time" is, for
+                                    instance—it's a move in the right direction.
+                                    <br><br>
+                                    The CMA is a UK-based agency, but a Microsoft spokesperson confirmed in an email to PC Gamer that the subscription policy changes will be
+                                    applied internationally. "Changes to inactive subscriptions will initially roll out in the UK and will be available globally soon," the
+                                    representative said.
+                                    <br><br>
+                                    Microsoft Gaming CEO Phil Spencer recently said that he doesn't view subscriptions as a replacement for conventional purchases, but there's no
+                                    question that Game Pass is big business for Microsoft. The service recently surpassed 25 million subscribers and that number is bound to
+                                    continue going up as Microsoft adds newly-acquired Activision Blizzard games to its lineup.</p>
+                            </div>
+                            <div class="modal-footer">
+                                <a href="#!"
+                                   class="modal-close waves-effect waves-yellow btn-flat">BACK</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="news-image">
+                        <img src="{% static 'images/news-images/news1.jpg' %}" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="news-content" id="news2">
+                <div class="news-title">
+                    <h4>Current and former Blizzard employees are hyped about its new survival game</h4>
+                </div>
+                <div class="news-data">
+                    <div class="news-description">
+                        <p class="description">
+                            We know that Blizzard's upcoming survival game is set in a new universe, but otherwise the studio isn't saying much about the game, which it's still
+                            referring to as "unannounced."
+                            <br><br>
+                            However, both current and former Blizzard employees have expressed their feelings about the survival game and its development team on social media.
+                            They're prevented from spilling any secrets due to non-disclosure agreements, which are standard in the business, but what they are saying, with notable
+                            consistency, is that they're thrilled about the game and the team behind it.
+                        </p>
+                        <a href="#modal2"
+                           class="btn yellow btn-yellow btn-medium btn-read-more modal-trigger">READ
+                            MORE
+                        </a>
+                        <div id="modal2"
+                             class="modal modal-news">
+                            <div class="modal-content">
+                                <p>We know that Blizzard's upcoming survival game is set in a new universe, but otherwise the studio isn't saying much about the game, which it's
+                                    still referring to as "unannounced."
+                                    <br><br>
+                                    However, both current and former Blizzard employees have expressed their feelings about the survival game and its development team on social
+                                    media. They're prevented from spilling any secrets due to non-disclosure agreements, which are standard in the business, but what they are
+                                    saying, with notable consistency, is that they're thrilled about the game and the team behind it.
+                                    <br><br>
+                                    Blizzard's effort to hire new developers for the project is surely being helped by all the praise, especially in the context of last year's
+                                    sexism and harassment allegations and uncertainties around the impending Microsoft acquisition, but the enthusiasm appears to be genuine. Asked
+                                    whether Blizzard had any part in the outpouring of praise, a company spokesperson told PC Gamer that the company "did not encourage employees to
+                                    make positive posts about the recent announcement."
+                                    <br><br>
+                                    "We have a talented team creating this game, and we're happy to see their genuine enthusiasm for their work, and others' excitement to share
+                                    it," the spokesperson said.
+                                    <br><br>
+                                    Notably, even some of Activision Blizzard's most outspoken critics have praised the project.
+                                    <br><br>
+                                    "Super excited about today's reveal," wrote Valentine Powell, a World of Warcraft senior UI engineer who has helped organize Activision Blizzard
+                                    employees in the wake of last year's sexism and harassment lawsuit. "This game looks amazing, and I'm happy that the devs on the project can now
+                                    be open about working on it."
+                                    <br><br>
+                                    Leading the survival game project is Craig Amai, who previously worked on World of Warcraft for over a decade, starting as an in-game customer
+                                    support lead in 2004 and concluding as lead quest designer. According to his LinkedIn resume, Amai began work on the survival game four and a
+                                    half years ago, in July 2017.
+                                    <br><br>
+                                    "Once upon a time this dream project was [a] humble pitch deck on my desktop," Amai wrote on Twitter. "Now it’s a team full of caring and
+                                    passionate people sharing a vision I couldn’t be prouder to be part of."
+                                </p>
+                            </div>
+                            <div class="modal-footer">
+                                <a href="#!"
+                                   class="modal-close waves-effect waves-yellow btn-flat">BACK</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="news-image">
+                        <img
+                                src="{% static 'images/news-images/news2.jpg' %}" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="news-content" id="news3">
+                <div class="news-title">
+                    <h4>Elden Ring director Miyazaki says he doesn't want new players 'to stress about difficulty'</h4>
+                </div>
+                <div class="news-data">
+                    <div class="news-description">
+                        <p class="description">
+                            After I played hours of Elden Ring in last year's network test, I wrote that it was the most flexible Souls game by a longshot. Flexible doesn't
+                            necessarily mean easy—there are still bosses in Elden Ring who will stomp you mercilessly until you learn their patterns—but you can now explore the
+                            open world looking for easier battles or more gear. FromSoftware boss Hidetaka Miyazaki cited that flexibility in a new interview on the PlayStation
+                            Blog, in which he touched on the notorious difficulty of the studio's games. "I’d like new players to feel unpressured and that they can approach the
+                            game at their pace," Miyazaki said.
+                            <br><br>
+                            "I realize that while we offer games with a high level of challenge, we design them in a way that feels fulfilling to overcome. But I don’t want new
+                            players to worry or stress about that difficulty too much… They can come back to something later when they’re at an impasse so that they can have this
+                            freedom of progression and not have to bang their head against a wall over and over."
+                        </p>
+                        <a href="#modal3"
+                           class="btn yellow btn-yellow btn-medium btn-read-more modal-trigger">READ
+                            MORE
+                        </a>
+                        <div id="modal3"
+                             class="modal modal-news">
+                            <div class="modal-content">
+                                <p>After I played hours of Elden Ring in last year's network test, I wrote that it was the most flexible Souls game by a longshot. Flexible doesn't
+                                    necessarily mean easy—there are still bosses in Elden Ring who will stomp you mercilessly until you learn their patterns—but you can now explore
+                                    the open world looking for easier battles or more gear. FromSoftware boss Hidetaka Miyazaki cited that flexibility in a new interview on the
+                                    PlayStation Blog, in which he touched on the notorious difficulty of the studio's games. "I’d like new players to feel unpressured and that they
+                                    can approach the game at their pace," Miyazaki said.
+                                    <br><br>
+                                    "I realize that while we offer games with a high level of challenge, we design them in a way that feels fulfilling to overcome. But I don’t want
+                                    new players to worry or stress about that difficulty too much… They can come back to something later when they’re at an impasse so that they can
+                                    have this freedom of progression and not have to bang their head against a wall over and over."
+                                    <br><br>
+                                    Arguments over game difficulty—and whether developers should include customizable difficulty options—flare up around the release of each new
+                                    FromSoftware game, and Elden Ring will likely be no different. And yes, Miyazaki is well aware of the debate.
+                                    <br><br>
+                                    "It’s a valid discussion," he said. "I feel like our approach to these games, not just Elden Ring, is to design them to encourage the player to
+                                    overcome adversity. We don’t try to force difficulty or make things hard for the sake of it. We want players to use their cunning, study the
+                                    game, memorize what’s happening, and learn from their mistakes. We don’t want players to feel like the game is unfairly punishing, but rather
+                                    that there’s a chance to win a difficult encounter and make progress. We understand that Souls-like games are regularly associated with
+                                    impossible levels of difficulty with high barriers to entry. But we try to design the games to make the cycle of repeatedly trying to overcome
+                                    these challenges enjoyable in itself. So we hope that with Elden Ring and the new options it provides, it will be a success in that respect."
+                                    <br><br>
+                                    Miyazaki said that the Elden Ring team has not "intentionally tried to lower the game’s difficulty," but that he thinks that the freedom of the
+                                    open world and the ease of playing in multiplayer compared to previous Souls games will mean more players make it to the end of this one.
+                                    <br><br>
+                                    And if you do make it to the end, Miyazaki confirmed that a New Game+ option will be there waiting for you. Elden Ring is out on February 25th.
+                                </p>
+                            </div>
+                            <div class="modal-footer">
+                                <a href="#!"
+                                   class="modal-close waves-effect waves-yellow btn-flat">BACK</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="news-image">
+                        <img
+                                src="{% static 'images/news-images/news3.jpg' %}" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="news-content" id="news4">
+                <div class="news-title">
+                    <h4>System Shock show to be written and directed by Mortal Kombat scriptwriter</h4>
+                </div>
+                <div class="news-data">
+                    <div class="news-description">
+                        <p class="description">
+                            Last year Nightdive Studios and livestreaming platform Binge.com announced a System Shock series, based on the cult Looking Glass games about a rogue AI
+                            and horribly warped crew aboard a corporate space station. Now comes the news that Greg Russo, who wrote the recent Mortal Kombat movie alongside
+                            various other game adaptations, is to write and direct the series (thanks, Deadline).
+                            <br><br>
+                            "I’m honored to have the opportunity to work alongside the fantastic team at Binge and Nightdive Studios to bring the iconic System Shock franchise to
+                            life," said Russo. "I’ve been waiting for the right opportunity to make my directorial debut, and I finally found it."
+                        </p>
+                        <a href="#modal4"
+                           class="btn yellow btn-yellow btn-medium btn-read-more modal-trigger">READ
+                            MORE
+                        </a>
+                        <div id="modal4"
+                             class="modal modal-news">
+                            <div class="modal-content">
+                                <p>Last year Nightdive Studios and livestreaming platform Binge.com announced a System Shock series, based on the cult Looking Glass games about a
+                                    rogue AI and horribly warped crew aboard a corporate space station. Now comes the news that Greg Russo, who wrote the recent Mortal Kombat movie
+                                    alongside various other game adaptations, is to write and direct the series (thanks, Deadline).
+                                    <br><br>
+                                    "I’m honored to have the opportunity to work alongside the fantastic team at Binge and Nightdive Studios to bring the iconic System Shock
+                                    franchise to life," said Russo. "I’ve been waiting for the right opportunity to make my directorial debut, and I finally found it."
+                                    <br><br>
+                                    Russo will also executive produce the series alongside Nightdive Studios’ Stephen Kick and Larry Kuperman. Binge CCO Allan Ungar will be the
+                                    producer.
+                                    <br><br>
+                                    "Greg is a superbly talented screenwriter who possesses an unmatched knowledge and passion for gaming," said Ungar. "His artistic approach to
+                                    storytelling and his deep understanding of the source material will undoubtedly get fans excited about this new franchise. We’re thrilled to be
+                                    bringing him on board and can’t wait to share his vision with audiences worldwide."
+                                    <br><br>
+                                    The series will be set on Citadel Station, the location for the original System Shock, a space station owned by the Tri-Optimum Corporation and
+                                    controlled by an AI named SHODAN. Russo shared some further thoughts on social media.
+                                    <br><br>
+                                    As well as Mortal Kombat, Russo has written the upcoming Space Invaders and Saints Row movies. He also wrote a Resident Evil script that never
+                                    got off the ground, which he shared some details of following this announcement. "What I can tell you is it followed RE7 into RE8. Basically
+                                    Ethan, Mia, Zoe, Eveline, etc. But there was uncertainty at the time as to how RE7 was going to perform. This was early 2017. In hindsight, it
+                                    performed really well. Idk. Would have been fun."
+                                    <br><br>
+                                    Away from the small screen Nightdive Studios, which acquired the rights to the series in 2015, is remaking the original game and an "enhanced
+                                    edition" of System Shock 2; System Shock 3 is also purportedly in development but hasn't broken cover since May 2020, when Tencent took charge.
+                                    <br><br>
+                                    System Shock is one of the PC gaming greats (one of those you want to replay whenever someone mentions it) and its acclaim is partly owed to its
+                                    creepy and oppressive atmosphere, that sense Russo refers to of being an insect that something is out to crush. Binge has previously said it
+                                    expects to share more details about the System Shock series this year to coincide with the platform's launch, so hopefully we'll see something
+                                    sooner rather than later. I know, we shodan't get our hopes up.
+                                </p>
+                            </div>
+                            <div class="modal-footer">
+                                <a href="#!"
+                                   class="modal-close waves-effect waves-yellow btn-flat">BACK</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="news-image">
+                        <img
+                                src="{% static 'images/news-images/news4.jpg' %}" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="footer-content">
+        <div class="left">
+            <a href="#" class="brand-logo"><i class="fas fa-gamepad"></i> GAMEWEB</a>
+            <p>GameWeb is a website about video games. It's a big community service where you can browse all released games, rate and comment them. Feel free to explore
+                GameWeb!</p>
+        </div>
+        <div class="middle">
+            <h5>FOLLOW US</h5>
+            <div class="middle-content">
+                <div class="socials">
+                    <i class="fab fa-facebook-square"></i>
+                    <i class="fab fa-instagram-square"></i>
+                    <i class="fab fa-linkedin"></i>
+                    <i class="fab fa-steam-square"></i>
+                </div>
+                <div class="discord">
+                    <p>JOIN OUR DISCORD SERVER <i class="fab fa-discord"></i></p>
+                </div>
+            </div>
+        </div>
+        <div class="right">
+            <h5>LINKS</h5>
+            <div class="links">
+                <a href="#">Home</a>
+                <a href="#section-aboutus">About us</a>
+                <a href="#section-News">News</a>
+                {% if user.is_authenticated %}
+                <a href="{% url 'forum' %}">Forum</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="footer-copyright">
+        <p>Created by Jakub Makaruk. &copy; <span id="current-year"></span></p>
+    </div>
+</footer>
+{% endblock content %}
+
+
+{% block javascript %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script type="text/javascript" src="{% static 'js/slider.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/nav-handler.js' %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script type="text/javascript" src="{% static 'js/tabs-handler.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/modal-home.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/copyright.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/scrollspy.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/dropdown-home.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/login-register-swap-handler.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/alert-handler.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/forms-home-handler.js' %}"></script>
+<!--<script type="text/javascript">-->
+<!--    const usernamesUsers = "{{ usernames }}";-->
+<!--    const emailsUsers = "{{ emails }}";-->
+
+<!--    console.log(emailsUsers);-->
+
+<!--    document.querySelector('#loginRegister').addEventListener('onchange', () => {-->
+<!--        if (usernamesUsers.includes(this.value)) {-->
+<!--            console.log('wrong login');-->
+<!--        }-->
+<!--    })-->
+<!--    documnet.querySelector('#emailRegiste').addEventListener('onchange', () => {-->
+<!--        if (emailsUsers.includes(this.value)) {-->
+<!--            console.log('wrong email');-->
+<!--        }-->
+<!--    })-->
+<!--    document.querySelector('#repeatPasswordRegister').addEventListener('onchange', () => {-->
+<!--        if (this.value)-->
+<!--    })-->
+<!--</script>-->
+{% endblock %}

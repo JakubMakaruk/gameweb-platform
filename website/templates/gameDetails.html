@@ -1,0 +1,152 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block styles %}
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'css/gameDetails.css' %}">
+{% endblock %}
+
+{% block content %}
+<header>
+    <nav class="grey darken-4">
+        <a href="{% url 'forum' %}" class="brand-logo"><i class="fas fa-gamepad"></i> GAMEWEB</a>
+        <ul class="right">
+            <li><a href="{% url 'forum' %}">Forum</a></li>
+            <li><a href="{% url 'search' %}">Search</a></li>
+            <li><a href="{% url 'ranking' %}">Ranking</a></li>
+            <li><a data-target="dropdownAccount" class="dropdown-account btn-login btn-yellow waves-effect waves-light yellow btn-large modal-trigger">
+                My account
+            </a></li>
+        </ul>
+    </nav>
+    <ul id='dropdownAccount' class='dropdown-content'>
+        <li><a href="{% url 'home' %}">RETURN TO HOME PAGE</a></li>
+        <li class="divider" tabindex="-1"></li>
+        <li><a href="#!">SETTINGS</a></li>
+        <li class="divider" tabindex="-1"></li>
+        <li><a href="{% url 'logoutPage' %}">LOGOUT</a></li>
+    </ul>
+</header>
+
+<div id="section-content" class="">
+    <div class="game">
+        <div class="game-details">
+            <div class="game-header">
+                <img src="{{ game.cover_url }}">
+                <div class="details">
+                    <h1>{{ game.name }}</h1>
+                    <p><b>Genres:</b> {{ game.genres }}</p>
+                    <p><b>Platforms:</b> {{ game.platforms }}</p>
+                    <p><b>Release date:</b> {{ game.release_date }}</p>
+                </div>
+            </div>
+            <div class="rate">
+                <i class="material-icons star-icon">star</i>
+                <p class="rate-value">{{ game.rate }}</p>
+                <p class="rate-count">Count: {{ game.count_rates }}</p>
+                <a href="#modalAddRate" class="btn btn-yellow waves-effect waves-light modal-trigger btn-add-rate">Add rate</a>
+            </div>
+        </div>
+        <div class="game-description">
+            <h3>Game Description</h3>
+            <p>{{ game.summary }}</p>
+        </div>
+        <div class="game-comments">
+            <div class="game-comments-header">
+                <h3>Comments</h3>
+                <a href="#modalAddComment" class="btn btn-yellow waves-effect waves-light btn-large modal-trigger btn-add-comment">+ Add comment</a>
+            </div>
+
+            <div class="comments">
+                {% for comment in comments %}
+                    <div class="collection">
+                        <div class="comment-header">
+                            <p class="comment-author">Author: <span>{{ comment.author.username }}</span></p>
+                            <p class="comment-date">Posted: <span>{{ comment.date | date:"d:m:Y" }}<span></p>
+                        </div>
+                        <p class="comment-content">{{ comment.content }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <div id="modalAddRate" class="modal">
+        <div class="modal-content">
+            <h3>RATE - {{ game.name }}</h3>
+            <form action="{% url 'addRate' pk=game.game_id %}" method="POST" class="stars">
+                {% csrf_token %}
+                <button name="rate-value" type="submit" value="10">
+                    <i class="material-icons star-icon star10">star</i>
+                    <p class="star-value">10</p>
+                </button>
+                <button name="rate-value" type="submit" value="9">
+                    <i class="material-icons star-icon star9">star</i>
+                    <p class="star-value">9</p>
+                </button>
+                <button name="rate-value" type="submit" value="8">
+                    <i class="material-icons star-icon star8">star</i>
+                    <p class="star-value">8</p>
+                </button>
+                <button name="rate-value" type="submit" value="7">
+                    <i class="material-icons star-icon star7">star</i>
+                    <p class="star-value">7</p>
+                </button>
+                <button name="rate-value" type="submit" value="6">
+                    <i class="material-icons star-icon star6">star</i>
+                    <p class="star-value">6</p>
+                </button>
+                <button name="rate-value" type="submit" value="5">
+                    <i class="material-icons star-icon star5">star</i>
+                    <p class="star-value">5</p>
+                </button>
+                <button name="rate-value" type="submit" value="4">
+                    <i class="material-icons star-icon star4">star</i>
+                    <p class="star-value">4</p>
+                </button>
+                <button name="rate-value" type="submit" value="3">
+                    <i class="material-icons star-icon star3">star</i>
+                    <p class="star-value">3</p>
+                </button>
+                <button name="rate-value" type="submit" value="2">
+                    <i class="material-icons star-icon star2">star</i>
+                    <p class="star-value">2</p>
+                </button>
+                <button name="rate-value" type="submit" value="1">
+                    <i class="material-icons star-icon star1">star</i>
+                    <p class="star-value">1</p>
+                </button>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect waves-red btn-flat left">BACK</a>
+        </div>
+    </div>
+    <form action="{% url 'addComment' pk=game.game_id %}" method="POST" id="modalAddComment" class="modal">
+        <div class="modal-content">
+            <h3>COMMENT - {{ game.name }}</h3>
+            {% csrf_token %}
+            <div class="input-field">
+                <i class="material-icons prefix">mode_edit</i>
+                <textarea name="comment-text" id="icon_prefix2" class="materialize-textarea"></textarea>
+                <label for="icon_prefix2">Comment</label>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect waves-red btn-flat left">BACK</a>
+            <button type="submit" class="waves-effect waves-green btn-flat right">ADD</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+{% block javascript %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script type="text/javascript" src="{% static 'js/dropdown-home.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/modal-gameDetails.js' %}"></script>
+<script>
+</script>
+{% endblock %}

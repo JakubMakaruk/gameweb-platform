@@ -1,0 +1,566 @@
+header {
+  height: 100vh;
+  width: 100%;
+  position: relative;
+}
+header nav {
+  position: fixed;
+  height: 100px;
+  line-height: 100px;
+  box-shadow: none;
+  top: 0;
+  z-index: 1;
+  transition: background-color 0.3s ease;
+}
+header nav ul {
+  margin-right: 60px;
+}
+header nav ul li {
+  width: 200px;
+  text-align: center;
+}
+header nav ul li a {
+  transition: color 0.5s ease;
+}
+header nav ul li .active {
+  color: #ffeb3b;
+}
+header nav ul li:hover:not(:last-child) {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+header nav ul .btn-login {
+  margin-left: 50px;
+  width: 150px;
+}
+header nav .brand-logo {
+  font-family: "Staatliches", cursive;
+  font-size: 2.5rem;
+  margin-left: 60px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 2px;
+  transition: color 0.3s ease;
+}
+header nav .brand-logo i {
+  float: none;
+  font-size: 30px;
+}
+header nav .brand-logo:hover {
+  color: #ffeb3b;
+}
+header #modalLoginRegister {
+  overflow: hidden;
+  width: 20%;
+  padding: 30px;
+}
+header #modalLoginRegister #login-modal {
+  display: block;
+}
+header #modalLoginRegister #register-modal {
+  display: none;
+}
+header #modalLoginRegister .modal-content {
+  padding: 30px 0 0 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+header #modalLoginRegister .modal-content h4 {
+  font-family: "Staatliches", cursive;
+  font-size: 3rem;
+  margin-bottom: 40px;
+}
+header #modalLoginRegister .modal-content .question-text {
+  margin-top: 10px;
+  font-size: 0.8rem;
+  color: #1d1d1d;
+}
+header #modalLoginRegister .modal-content .switch-panel-text {
+  margin: 15px 0 10px;
+  padding: 5px 7px;
+  color: #1d1d1d;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+header #modalLoginRegister .modal-content .switch-panel-text:hover {
+  transform: scale(1.1);
+  color: #dd2c00;
+}
+header #modalLoginRegister .modal-footer {
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+}
+header #modalLoginRegister .modal-footer .btn-red:hover {
+  background: #ffd2ca;
+}
+header #modalLoginRegister .modal-footer .btn-green:hover {
+  background: #c2efad;
+}
+header #dropdownAccount a {
+  color: #000;
+  font-size: 1rem;
+  text-align: right;
+}
+header .carousel {
+  height: 100%;
+  width: 100%;
+}
+header .carousel .carousel-slide {
+  height: 100%;
+  width: 500%;
+  position: relative;
+}
+header .carousel .carousel-slide input {
+  pointer-events: all;
+}
+header .carousel .carousel-slide .fade-panel {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 10;
+}
+header .carousel .carousel-slide .images {
+  height: 100%;
+  display: flex;
+}
+header .carousel .carousel-slide .images .slide {
+  height: 100%;
+  width: 20%;
+  transition: margin 2s ease-in-out;
+}
+header .carousel .carousel-slide .images img {
+  height: 100%;
+  width: 100%;
+}
+header .carousel .navigation-manual {
+  z-index: 50;
+  position: absolute;
+  top: 50%;
+  left: 2%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  counter-reset: manual-btn-counter;
+}
+header .carousel .navigation-manual .manual-btn {
+  position: relative;
+  height: 150px;
+  border-left: 5px solid #fff;
+  padding-right: 40px;
+  margin-bottom: 3px;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+}
+header .carousel .navigation-manual .manual-btn:after {
+  counter-increment: manual-btn-counter;
+  content: counter(manual-btn-counter);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #fff;
+  position: absolute;
+  bottom: 0;
+  left: 10px;
+  transition: color 0.3s ease;
+}
+header .carousel .navigation-manual .manual-btn:hover {
+  border-left-color: #f7ffac;
+}
+header .carousel .navigation-manual .manual-btn:hover:after {
+  color: #f7ffac;
+}
+header .header-content {
+  position: absolute;
+  top: 50%;
+  left: 15%;
+  transform: translateY(-50%);
+  color: #000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+header .header-content .header-content-text h1 {
+  font: 700 8rem "Staatliches", cursive;
+  color: #fff;
+  margin: 0;
+}
+header .header-content .btn-start-explore {
+  margin-top: 30px;
+  width: 200px;
+}
+
+.btn-yellow {
+  color: #000;
+  font: 400 1.2rem "Staatliches", cursive;
+  line-height: 54px;
+}
+
+#radio1:checked ~ .navigation-manual .manual-btn-1 {
+  border-width: 0 7px 0 7px;
+  border-color: #ffeb3b;
+}
+#radio1:checked ~ .navigation-manual .manual-btn-1:after {
+  color: #ffeb3b;
+}
+#radio1:checked ~ .images .first {
+  margin-left: 0;
+}
+
+#radio2:checked ~ .navigation-manual .manual-btn-2 {
+  border-width: 0 7px 0 7px;
+  border-color: #ffeb3b;
+}
+#radio2:checked ~ .navigation-manual .manual-btn-2:after {
+  color: #ffeb3b;
+}
+#radio2:checked ~ .images .first {
+  margin-left: -20%;
+}
+
+#radio3:checked ~ .navigation-manual .manual-btn-3 {
+  border-width: 0 7px 0 7px;
+  border-color: #ffeb3b;
+}
+#radio3:checked ~ .navigation-manual .manual-btn-3:after {
+  color: #ffeb3b;
+}
+#radio3:checked ~ .images .first {
+  margin-left: -40%;
+}
+
+#radio4:checked ~ .navigation-manual .manual-btn-4 {
+  border-width: 0 7px 0 7px;
+  border-color: #ffeb3b;
+}
+#radio4:checked ~ .navigation-manual .manual-btn-4:after {
+  color: #ffeb3b;
+}
+#radio4:checked ~ .images .first {
+  margin-left: -60%;
+}
+
+#section-aboutus {
+  color: #333333;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+#section-aboutus .title {
+  width: 300px;
+  border-bottom: 2px solid #ffeb3b;
+}
+#section-aboutus .title .about-us-title {
+  margin: 40px 0 10px;
+  text-align: center;
+  font: 400 3rem "Staatliches", cursive;
+}
+#section-aboutus .content {
+  margin: 20px 0 40px;
+  width: 70%;
+  text-align: center;
+}
+#section-aboutus .content .cards {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+}
+#section-aboutus .content .cards .card-panel {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+}
+#section-aboutus .content .cards .card-panel .card-icon {
+  margin: 20px 0;
+  height: 20%;
+}
+#section-aboutus .content .cards .card-panel .card-icon i {
+  color: #ffeb3b;
+  font-size: 35px;
+}
+#section-aboutus .content .cards .card-panel .card-title {
+  font: 400 1.5rem "Staatliches", cursive;
+  margin-bottom: 30px;
+}
+#section-aboutus .content .cards .card-panel .card-description {
+  margin-bottom: 20px;
+  font-size: 0.9rem;
+}
+
+#section-news {
+  background: #1d1d1d;
+}
+#section-news .news-container {
+  margin: 0 auto;
+  padding-bottom: 60px !important;
+  width: 80%;
+}
+#section-news .news-container .title {
+  color: #fff;
+  width: 300px;
+}
+#section-news .news-container .title .news-title {
+  padding: 40px 0 20px;
+  text-align: center;
+  font: 400 3rem "Staatliches", cursive;
+}
+#section-news .news-container .tabs {
+  background-color: transparent;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+#section-news .news-container .tabs .tab {
+  width: 25%;
+  background: #292929;
+}
+#section-news .news-container .tabs .tab a {
+  color: #fff;
+}
+#section-news .news-container .tabs .tab .active {
+  font-weight: 700;
+}
+#section-news .news-container .tabs .tab a:focus {
+  background: transparent;
+}
+#section-news .news-container .tabs .tab a:focus .active {
+  background: transparent;
+}
+#section-news .news-container .tabs .indicator {
+  background-color: #ffeb3b;
+}
+#section-news .news-container .news .active {
+  display: flex !important;
+}
+#section-news .news-container .news-content {
+  flex-direction: column;
+}
+#section-news .news-container .news-content .news-title {
+  color: #ffeb3b;
+}
+#section-news .news-container .news-content .news-title h4 {
+  font-family: "Bebas Neue", cursive;
+  letter-spacing: 1px;
+  font-weight: 700;
+}
+#section-news .news-container .news-content .news-data {
+  margin-top: 20px;
+  display: flex;
+  gap: 5%;
+}
+#section-news .news-container .news-content .news-data .news-description {
+  width: 60%;
+}
+#section-news .news-container .news-content .news-data .news-description .description {
+  color: #ffffff;
+}
+#section-news .news-container .news-content .news-data .news-description .btn-read-more {
+  line-height: 36px;
+  margin-top: 30px;
+}
+#section-news .news-container .news-content .news-data .news-image {
+  width: 35%;
+}
+#section-news .news-container .news-content .news-data .news-image img {
+  border: 2px solid #ffeb3b;
+  width: 100%;
+}
+
+footer {
+  margin: 0 auto;
+  padding: 30px 0 50px;
+  width: 80%;
+}
+footer .footer-content {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 5%;
+}
+footer .left, footer .middle, footer .right {
+  width: 30%;
+  min-width: 200px;
+}
+footer .left .brand-logo {
+  font-family: "Staatliches", cursive;
+  font-size: 2.5rem;
+  margin-left: 20px;
+  font-weight: 700;
+  color: #1d1d1d;
+  letter-spacing: 2px;
+  transition: color 0.3s ease;
+}
+footer .left .brand-logo i {
+  float: none;
+  font-size: 30px;
+}
+footer .left .brand-logo:hover {
+  color: #ffeb3b;
+}
+footer .left p {
+  margin-top: 15px;
+  font-size: 1rem;
+}
+footer .middle h5 {
+  font-family: "Staatliches", cursive;
+}
+footer .middle .middle-content .socials {
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-around;
+}
+footer .middle .middle-content .socials i {
+  font-size: 40px;
+  cursor: pointer;
+}
+footer .middle .middle-content .socials .fa-facebook-square:hover {
+  color: #3b5998;
+}
+footer .middle .middle-content .socials .fa-instagram-square:hover {
+  background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+footer .middle .middle-content .socials .fa-linkedin:hover {
+  color: #0e76a8;
+}
+footer .middle .middle-content .socials .fa-steam-square:hover {
+  background: linear-gradient(#0F1C30, #1383B4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+footer .middle .middle-content .discord {
+  width: 70%;
+  margin: 20px auto 0;
+  padding: 5px 10px;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background 0.5s ease, color 0.5s ease;
+}
+footer .middle .middle-content .discord p {
+  font-size: 1.2rem;
+  font-family: "Staatliches", cursive;
+  text-align: center;
+}
+footer .middle .middle-content .discord p i {
+  font-size: 20px;
+  padding-left: 10px;
+}
+footer .middle .middle-content .discord:hover {
+  background: #738ADB;
+  color: #fff;
+}
+footer .right h5 {
+  font-family: "Staatliches", cursive;
+}
+footer .right .links {
+  display: flex;
+  flex-direction: column;
+}
+footer .right .links a {
+  margin: 0 0 10px 30px;
+  color: black;
+  position: relative;
+}
+footer .right .links a:before {
+  content: ">";
+  position: absolute;
+  top: 50%;
+  left: -30px;
+  transition: left 0.3s ease;
+  transform: translateY(-50%);
+}
+footer .right .links a:hover {
+  font-weight: 700;
+}
+footer .right .links a:hover:before {
+  left: -15px;
+}
+footer hr {
+  margin: 20px 0;
+  width: 100%;
+}
+footer .footer-copyright p, footer .footer-copyright span {
+  font-size: 0.9rem;
+}
+
+.materialert {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  min-width: 600px;
+  padding: 15px;
+  margin-bottom: 20px;
+  margin-top: 15px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  transition: all 0.1s linear;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  transition: visibility 0.3s ease, opacity 0.3s ease;
+}
+
+.materialert .material-icons {
+  margin-right: 10px;
+}
+
+.materialert .close-alert {
+  -webkit-appearance: none;
+  border: 0;
+  cursor: pointer;
+  color: inherit;
+  background: 0 0;
+  font-size: 22px;
+  line-height: 20px;
+  font-weight: bold;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
+  filter: alpha(opacity=40);
+  margin-bottom: -5px;
+  position: absolute;
+  top: 16px;
+  right: 15px;
+}
+
+.materialert.info {
+  background-color: #039be5;
+  color: #fff;
+}
+
+.materialert.success {
+  background-color: #43a047;
+  color: #fff;
+}
+
+.materialert.error {
+  background-color: #c62828;
+  color: #fff;
+}
+
+.materialert.danger {
+  background-color: #c62828;
+  color: #fff;
+}
+
+.materialert.warning {
+  background-color: #fbc02d;
+  color: #fff;
+}
+
+.shadow-bg {
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+/*# sourceMappingURL=index.css.map */

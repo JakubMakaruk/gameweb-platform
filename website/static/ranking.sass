@@ -1,0 +1,49 @@
+$yellow: #ffeb3b
+
+#section-ranking
+  h1
+    text-align: center
+    font-family: "Staatliches", cursive
+    font-weight: 700
+  .collection
+    margin: 0 auto
+    padding: 20px
+    width: 70%
+    .collection-item
+      display: flex
+      gap: 30px
+      img
+        border: 2px solid black
+      .content
+        width: 100%
+        display: flex
+        justify-content: space-between
+        .game-description
+          display: flex
+          flex-direction: column
+          justify-content: space-around
+          width: 90%
+          h3
+            margin: 0
+            font-family: "Staatliches", cursive
+          .btn-view-details
+            background: $yellow
+            font-family: "Staatliches", cursive
+            color: #000
+            width: 150px
+        .game-rating
+          width: 10%
+          display: flex
+          flex-direction: column
+          justify-content: center
+          gap: 10px
+          .star-icon, .rate-value, .rate-count
+            text-align: center
+          .star-icon
+            font-size: 50px
+            color: $yellow
+          .rate-value
+            font-family: "Staatliches", cursive
+            font-size: 30px
+          .rate-count
+            font-size: 1rem

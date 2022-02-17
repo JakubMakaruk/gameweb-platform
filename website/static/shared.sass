@@ -1,0 +1,21 @@
+.input-field label
+  padding: 0 10px
+  color: #000
+
+input[type=text]:not(.browser-default),
+input[type=password]:not(.browser-default)
+  padding: 0 10px
+
+input[type=text]:not(.browser-default):focus:not([readonly])+label,
+input[type=password]:not(.browser-default):focus:not([readonly])+label
+  color: #dd2c00
+  /* label underline focus color */
+
+input[type=text]:not(.browser-default):focus:not([readonly]),
+input[type=password]:not(.browser-default):focus:not([readonly])
+  border-bottom: 1px solid #dd2c00
+  box-shadow: 0 1px 0 0 #dd2c00
+  /* icon prefix focus color */
+
+.input-field .prefix.active
+  color: #dd2c00

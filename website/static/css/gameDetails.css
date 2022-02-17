@@ -1,0 +1,190 @@
+header {
+  width: 100%;
+  position: relative;
+}
+header nav {
+  height: 100px;
+  line-height: 100px;
+  box-shadow: none;
+  top: 0;
+  z-index: 1;
+  transition: background-color 0.3s ease;
+}
+header nav ul {
+  margin-right: 60px;
+}
+header nav ul li {
+  width: 200px;
+  text-align: center;
+}
+header nav ul li a {
+  transition: color 0.5s ease;
+}
+header nav ul li .active {
+  color: #ffeb3b;
+}
+header nav ul li:hover:not(:last-child) {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+header nav ul .btn-login {
+  margin-left: 50px;
+  width: 150px;
+}
+header nav .brand-logo {
+  font-family: "Staatliches", cursive;
+  font-size: 2.5rem;
+  margin-left: 60px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 2px;
+  transition: color 0.3s ease;
+}
+header nav .brand-logo i {
+  float: none;
+  font-size: 30px;
+}
+header nav .brand-logo:hover {
+  color: #ffeb3b;
+}
+header #dropdownAccount a {
+  color: #000;
+  font-size: 1rem;
+  text-align: right;
+}
+
+#section-content {
+  height: calc(100vh - 100px);
+  width: 70%;
+  margin: 0 auto;
+}
+#section-content .game {
+  padding: 40px 0 20px;
+}
+#section-content .game .game-details {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+#section-content .game .game-details .game-header {
+  display: flex;
+  gap: 20px;
+}
+#section-content .game .game-details .game-header img {
+  border: 2px solid black;
+}
+#section-content .game .game-details .game-header h1 {
+  margin: 0 0 20px;
+  font-family: "Staatliches", cursive;
+}
+#section-content .game .game-details .rate {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+#section-content .game .game-details .rate .star-icon {
+  color: #ffeb3b;
+  font-size: 60px;
+}
+#section-content .game .game-details .rate .rate-value {
+  font-family: "Staatliches", cursive;
+  font-size: 40px;
+}
+#section-content .game .game-details .rate .btn-add-rate {
+  margin-top: 40px;
+  background: #ffeb3b;
+  width: 100px;
+  line-height: 36px;
+}
+#section-content .game .game-description h3 {
+  margin: 0 0 10px;
+  font-family: "Staatliches", cursive;
+}
+#section-content .game .game-comments {
+  margin-top: 20px;
+}
+#section-content .game .game-comments .game-comments-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#section-content .game .game-comments .game-comments-header h3 {
+  font-family: "Staatliches", cursive;
+}
+#section-content .game .game-comments .game-comments-header .btn-add-comment {
+  margin: 30px 0 10px;
+}
+#section-content .game .game-comments .comments .collection {
+  padding: 20px;
+}
+#section-content .game .game-comments .comments .collection .comment-header {
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+#section-content .game .game-comments .comments .collection .comment-header p, #section-content .game .game-comments .comments .collection .comment-header span {
+  font-size: 0.8rem;
+}
+#section-content .game .game-comments .comments .collection .comment-header .comment-author span {
+  font-weight: 700;
+}
+#section-content .game .game-comments .comments .collection .comment-content {
+  padding: 0 10px;
+}
+#section-content .game .game-comments .btn-add-comment {
+  background: #ffeb3b;
+}
+
+#modalAddRate {
+  text-align: center;
+}
+#modalAddRate h3 {
+  font-family: "Staatliches", cursive;
+}
+#modalAddRate .stars {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+}
+#modalAddRate .stars button {
+  color: #1d1d1d;
+  background: none;
+  box-shadow: none;
+  border: none;
+}
+#modalAddRate .stars button i {
+  font-size: 60px;
+  cursor: pointer;
+}
+#modalAddRate .stars button .star-value {
+  font-size: 0.8rem;
+}
+#modalAddRate .stars button:hover, #modalAddRate .stars button:hover ~ button {
+  color: #ffeb3b;
+}
+
+#modalAddComment {
+  text-align: center;
+}
+#modalAddComment h3 {
+  font-family: "Staatliches", cursive;
+}
+#modalAddComment .input-field textarea:focus + label {
+  color: #dd2c00;
+}
+#modalAddComment .input-field textarea:focus {
+  border-bottom: 1px solid #dd2c00;
+  box-shadow: 0 1px 0 0 #dd2c00;
+}
+#modalAddComment .input-field .prefix.active {
+  color: #dd2c00;
+}
+
+.btn-yellow {
+  color: #000;
+  font: 400 1.2rem "Staatliches", cursive;
+  line-height: 54px;
+}
+
+/*# sourceMappingURL=gameDetails.css.map */

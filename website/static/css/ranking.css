@@ -1,0 +1,61 @@
+#section-ranking h1 {
+  text-align: center;
+  font-family: "Staatliches", cursive;
+  font-weight: 700;
+}
+#section-ranking .collection {
+  margin: 0 auto;
+  padding: 20px;
+  width: 70%;
+}
+#section-ranking .collection .collection-item {
+  display: flex;
+  gap: 30px;
+}
+#section-ranking .collection .collection-item img {
+  border: 2px solid black;
+}
+#section-ranking .collection .collection-item .content {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+#section-ranking .collection .collection-item .content .game-description {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 90%;
+}
+#section-ranking .collection .collection-item .content .game-description h3 {
+  margin: 0;
+  font-family: "Staatliches", cursive;
+}
+#section-ranking .collection .collection-item .content .game-description .btn-view-details {
+  background: #ffeb3b;
+  font-family: "Staatliches", cursive;
+  color: #000;
+  width: 150px;
+}
+#section-ranking .collection .collection-item .content .game-rating {
+  width: 10%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+}
+#section-ranking .collection .collection-item .content .game-rating .star-icon, #section-ranking .collection .collection-item .content .game-rating .rate-value, #section-ranking .collection .collection-item .content .game-rating .rate-count {
+  text-align: center;
+}
+#section-ranking .collection .collection-item .content .game-rating .star-icon {
+  font-size: 50px;
+  color: #ffeb3b;
+}
+#section-ranking .collection .collection-item .content .game-rating .rate-value {
+  font-family: "Staatliches", cursive;
+  font-size: 30px;
+}
+#section-ranking .collection .collection-item .content .game-rating .rate-count {
+  font-size: 1rem;
+}
+
+/*# sourceMappingURL=ranking.css.map */
