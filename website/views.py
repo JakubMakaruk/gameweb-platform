@@ -10,11 +10,14 @@ from django.contrib import messages
 from .forms import LoginForm, RegisterForm
 from .models import Rate, Comment
 import requests
-from .classes import RankingGame, DetailGame
+from .classes import RankingGame, DetailGame, ApiConfiguration
+
+# INITIALIZE --------------------------------------------------------------------
+
+API_CONFIGURATION = ApiConfiguration()
 
 
-# Create your views here.
-
+# VIEWS -------------------------------------------------------------------------
 
 def home(request):
     if request.method == 'GET':
@@ -50,9 +53,11 @@ def loginPage(request):
                 return redirect('home')
     return render(request, 'index.html', {})
 
+
 def logoutView(request):
     logout(request)
     return HttpResponseRedirect('')
+
 
 def registerPage(request):
     if 'loginRegister' in request.POST:
@@ -73,7 +78,6 @@ def registerPage(request):
         context = {
             'users': users,
         }
-
 
         return render(request, 'index.html', context)
 
@@ -107,16 +111,15 @@ def ranking(request):
     return render(request, 'ranking.html', context)
 
 
-
 def search(request):
     if request.method == 'POST':
         title = request.POST.get('title')
-        headers = {'Client-ID': '5mxvhx4wsmpqqere91pcd3ula4vec6', 'Authorization': 'Bearer ' 'u8m7oulqxfj8g0yg4f0t3a9z43h1p8'}
 
-        data = 'fields id; where name="' + title + '";'
+        uri = API_CONFIGURATION.get_apiUri() + '/games'
+        data = 'fields id; ' \
+               'where name="' + title + '";'
 
-        r = requests.post('https://api.igdb.com/v4/games', data=data, headers=headers)
-
+        r = requests.post(uri, data=data, headers=API_CONFIGURATION.get_headers())
 
         if len(r.json()) > 0:
             response_game_id = r.json()[0].get('id')
@@ -126,14 +129,12 @@ def search(request):
     return render(request, 'searchGame.html', {})
 
 
-
-
 def gameDetails(request, pk):
-    headers = {'Client-ID': '5mxvhx4wsmpqqere91pcd3ula4vec6', 'Authorization': 'Bearer u8m7oulqxfj8g0yg4f0t3a9z43h1p8'}
+    uri = API_CONFIGURATION.get_apiUri() + '/games'
+    data = 'fields id, name, cover, genres, platforms, summary, release_dates; ' \
+           'where id=' + str(pk) + ';'
 
-    data = 'fields id, name, cover, genres, platforms, summary, release_dates; where id=' + str(pk) + ';'
-
-    r = requests.post('https://api.igdb.com/v4/games', data=data, headers=headers)
+    r = requests.post(uri, data=data, headers=API_CONFIGURATION.get_headers())
     response_game = r.json()[0]
 
     if Rate.objects.filter(game_id=response_game.get('id')):
@@ -162,12 +163,10 @@ def gameDetails(request, pk):
     else:
         comments = {}
 
-
     context = {
         'game': game,
         'comments': comments
     }
-
 
     return render(request, 'gameDetails.html', context)
 
@@ -175,9 +174,8 @@ def gameDetails(request, pk):
 def addRate(request, pk):
     new_rate = Rate.objects.create(author=request.user, game_id=pk, value=request.POST.get('rate-value'))
     new_rate.save()
-    print(new_rate)
-    print(request.POST)
     return redirect('gameDetails', pk)
+
 
 def addComment(request, pk):
     new_comment = Comment.objects.create(author=request.user, game_id=pk, content=request.POST.get('comment-text'))
@@ -185,10 +183,7 @@ def addComment(request, pk):
     return redirect('gameDetails', pk)
 
 
-
 def get_games(ranking_games):
-    headers = {'Client-ID': '5mxvhx4wsmpqqere91pcd3ula4vec6', 'Authorization': 'Bearer u8m7oulqxfj8g0yg4f0t3a9z43h1p8'}
-
     ids = ""
     for index, game in enumerate(ranking_games):
         if index != len(ranking_games)-1:
@@ -196,9 +191,10 @@ def get_games(ranking_games):
         else:
             ids += str(game.get('game_id'))
 
+    uri = API_CONFIGURATION.get_apiUri() + '/games'
     data = 'fields id, name, cover; where id=(' + ids + ');'
 
-    r = requests.post('https://api.igdb.com/v4/games', data=data, headers=headers)
+    r = requests.post(uri, data=data, headers=API_CONFIGURATION.get_headers())
     temp_games = r.json()
 
     games = []
@@ -208,9 +204,8 @@ def get_games(ranking_games):
 
     return games
 
-def get_cover(games):
-    headers = {'Client-ID': '5mxvhx4wsmpqqere91pcd3ula4vec6', 'Authorization': 'Bearer u8m7oulqxfj8g0yg4f0t3a9z43h1p8'}
 
+def get_cover(games):
     ids = ""
     for index, game in enumerate(games):
         if index != len(games) - 1:
@@ -218,9 +213,10 @@ def get_cover(games):
         else:
             ids += str(game.get('cover'))
 
+    uri = API_CONFIGURATION.get_apiUri() + '/covers'
     data = 'fields id, url; where id=(' + ids + ');'
 
-    r = requests.post('https://api.igdb.com/v4/covers', data=data, headers=headers)
+    r = requests.post(uri, data=data, headers=API_CONFIGURATION.get_headers())
     temp_covers = r.json()
 
     covers_url = []
@@ -230,14 +226,14 @@ def get_cover(games):
 
     return covers_url
 
-def get_genres(game):
-    headers = {'Client-ID': '5mxvhx4wsmpqqere91pcd3ula4vec6', 'Authorization': 'Bearer u8m7oulqxfj8g0yg4f0t3a9z43h1p8'}
 
+def get_genres(game):
     ids = ','.join(str(x) for x in game.get('genres'))
 
+    uri = API_CONFIGURATION.get_apiUri() + '/genres'
     data = 'fields name; where id=(' + ids + ');'
 
-    r = requests.post('https://api.igdb.com/v4/genres', data=data, headers=headers)
+    r = requests.post(uri, data=data, headers=API_CONFIGURATION.get_headers())
     temp_genres = r.json()
 
     genres = ""
@@ -249,14 +245,14 @@ def get_genres(game):
 
     return genres
 
-def get_platforms(game):
-    headers = {'Client-ID': '5mxvhx4wsmpqqere91pcd3ula4vec6', 'Authorization': 'Bearer u8m7oulqxfj8g0yg4f0t3a9z43h1p8'}
 
+def get_platforms(game):
     ids = ','.join(str(x) for x in game.get('platforms'))
 
+    uri = API_CONFIGURATION.get_apiUri() + '/platforms'
     data = 'fields abbreviation; where id=(' + ids + ');'
 
-    r = requests.post('https://api.igdb.com/v4/platforms', data=data, headers=headers)
+    r = requests.post(uri, data=data, headers=API_CONFIGURATION.get_headers())
     temp_platforms = r.json()
 
     platforms = ""
@@ -268,14 +264,14 @@ def get_platforms(game):
 
     return platforms
 
-def get_releaseDate(game):
-    headers = {'Client-ID': '5mxvhx4wsmpqqere91pcd3ula4vec6', 'Authorization': 'Bearer u8m7oulqxfj8g0yg4f0t3a9z43h1p8'}
 
+def get_releaseDate(game):
     ids = str(game.get('release_dates')[0])
 
+    uri = API_CONFIGURATION.get_apiUri() + '/release_dates'
     data = 'fields human; where id=(' + ids + ');'
 
-    r = requests.post('https://api.igdb.com/v4/release_dates', data=data, headers=headers)
+    r = requests.post(uri, data=data, headers=API_CONFIGURATION.get_headers())
     temp_releaseDate = r.json()[0].get('human')
 
     return temp_releaseDate
