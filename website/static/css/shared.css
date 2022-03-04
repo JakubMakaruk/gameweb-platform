@@ -25,4 +25,10 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
   color: #dd2c00;
 }
 
+.btn-yellow {
+  color: #000;
+  font: 400 1.2rem "Staatliches", cursive;
+  line-height: 54px;
+}
+
 /*# sourceMappingURL=shared.css.map */

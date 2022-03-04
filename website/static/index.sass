@@ -100,26 +100,61 @@ header
             height: 100%
             width: 500%
             position: relative
-
             input
                 pointer-events: all
-
+            #radio1:checked
+                ~ .navigation-manual
+                    .manual-btn-1
+                        border-width: 0 7px 0 7px
+                        border-color: $yellow
+                        &:after
+                            color: $yellow
+                ~ .images
+                    .first
+                        margin-left: 0
+            #radio2:checked
+                ~ .navigation-manual
+                    .manual-btn-2
+                        border-width: 0 7px 0 7px
+                        border-color: $yellow
+                        &:after
+                            color: $yellow
+                ~ .images
+                    .first
+                        margin-left: -20%
+            #radio3:checked
+                ~ .navigation-manual
+                    .manual-btn-3
+                        border-width: 0 7px 0 7px
+                        border-color: $yellow
+                        &:after
+                            color: $yellow
+                ~ .images
+                    .first
+                        margin-left: -40%
+            #radio4:checked
+                ~ .navigation-manual
+                    .manual-btn-4
+                        border-width: 0 7px 0 7px
+                        border-color: $yellow
+                        &:after
+                            color: $yellow
+                ~ .images
+                    .first
+                        margin-left: -60%
             .fade-panel
                 height: 100%
                 width: 100%
                 position: absolute
                 background-color: rgba(0,0,0,.4)
                 z-index: 10
-
             .images
                 height: 100%
                 display: flex
-
                 .slide
                     height: 100%
                     width: 20%
                     transition: margin 2s ease-in-out
-
                 img
                     height: 100%
                     width: 100%
@@ -132,7 +167,6 @@ header
             transform: translateY(-50%)
             display: flex
             flex-direction: column
-
             counter-reset: manual-btn-counter
 
             .manual-btn
@@ -175,60 +209,6 @@ header
             margin-top: 30px
             width: 200px
 
-.btn-yellow
-    color: #000
-    font: 400 1.2rem 'Staatliches', cursive
-    line-height: 54px
-
-#radio1:checked
-    ~ .navigation-manual
-        .manual-btn-1
-            border-width: 0 7px 0 7px
-            border-color: $yellow
-
-            &:after
-                color: $yellow
-    ~ .images
-        .first
-            margin-left: 0
-
-#radio2:checked
-    ~ .navigation-manual
-        .manual-btn-2
-            border-width: 0 7px 0 7px
-            border-color: $yellow
-
-            &:after
-                color: $yellow
-    ~ .images
-        .first
-            margin-left: -20%
-
-#radio3:checked
-    ~ .navigation-manual
-        .manual-btn-3
-            border-width: 0 7px 0 7px
-            border-color: $yellow
-
-            &:after
-                color: $yellow
-
-    ~ .images
-        .first
-            margin-left: -40%
-
-#radio4:checked
-    ~ .navigation-manual
-        .manual-btn-4
-            border-width: 0 7px 0 7px
-            border-color: $yellow
-
-            &:after
-                color: $yellow
-    ~ .images
-        .first
-            margin-left: -60%
-
 // SECTION ABOUT US
 #section-aboutus
     color: $dark-black
@@ -240,11 +220,11 @@ header
         width: 300px
         border-bottom: 2px solid $yellow
         .about-us-title
-            margin: 40px 0 10px
+            margin: 60px 0 10px
             text-align: center
             font: 400 3rem 'Staatliches', cursive
     .content
-        margin: 20px 0 40px
+        margin: 20px 0 60px
         width: 70%
         text-align: center
         .cards
@@ -270,20 +250,16 @@ header
                     font-size: .9rem
 
 #section-news
-    //height: 70vh
     background: #1d1d1d
     .news-container
         margin: 0 auto
         padding-bottom: 60px !important
         width: 80%
-        // display: flex
-        // flex-direction: column
-        // align-items: center
         .title
             color: #fff
             width: 300px
             .news-title
-                padding: 40px 0 20px
+                padding: 60px 0 20px
                 text-align: center
                 font: 400 3rem 'Staatliches', cursive
         .tabs
@@ -334,9 +310,7 @@ header
 footer
     margin: 0 auto
     padding: 30px 0 50px
-    //height: 100vh
     width: 80%
-
     .footer-content
         display: flex
         justify-content: center
@@ -345,9 +319,7 @@ footer
     .left, .middle, .right
         width: 30%
         min-width: 200px
-
     .left
-        //background: #f7ffac
         .brand-logo
             font-family: 'Staatliches', cursive
             font-size: 2.5rem
@@ -365,9 +337,7 @@ footer
             margin-top: 15px
             font-size: 1rem
     .middle
-        //background: #a53e52
         h5
-            //font-weight: 700
             font-family: "Staatliches", cursive
         .middle-content
             .socials
@@ -410,7 +380,6 @@ footer
                 color: #fff
     .right
         h5
-            //font-weight: 700
             font-family: "Staatliches", cursive
         .links
             display: flex
@@ -503,8 +472,6 @@ footer
 .materialert.warning
     background-color: #fbc02d
     color: #fff
-
-
 
 .shadow-bg
     background-color: rgba(0, 0, 0, .9)

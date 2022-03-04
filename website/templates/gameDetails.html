@@ -4,6 +4,9 @@
 {% block styles %}
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link rel="stylesheet" href="{% static 'css/gameDetails.css' %}">
+<link rel="stylesheet" href="{% static 'css/shared.css' %}">
+<link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+
 {% endblock %}
 
 {% block content %}
@@ -51,6 +54,9 @@
             <h3>Game Description</h3>
             <p>{{ game.summary }}</p>
         </div>
+
+        <hr>
+
         <div class="game-comments">
             <div class="game-comments-header">
                 <h3>Comments</h3>
@@ -62,7 +68,7 @@
                     <div class="collection">
                         <div class="comment-header">
                             <p class="comment-author">Author: <span>{{ comment.author.username }}</span></p>
-                            <p class="comment-date">Posted: <span>{{ comment.date | date:"d:m:Y" }}<span></p>
+                            <p class="comment-date">Posted: <span>{{ comment.date | date:"d:m:Y" }}</span></p>
                         </div>
                         <p class="comment-content">{{ comment.content }}</p>
                     </div>
@@ -76,45 +82,35 @@
             <h3>RATE - {{ game.name }}</h3>
             <form action="{% url 'addRate' pk=game.game_id %}" method="POST" class="stars">
                 {% csrf_token %}
-                <button name="rate-value" type="submit" value="10">
-                    <i class="material-icons star-icon star10">star</i>
-                    <p class="star-value">10</p>
+                <button class="rateBtn" name="rate-value" type="submit" value="10">
+                    <i class="material-icons star-icon star-comment star10">star</i>
                 </button>
-                <button name="rate-value" type="submit" value="9">
+                <button class="rateBtn" name="rate-value" type="submit" value="9">
                     <i class="material-icons star-icon star9">star</i>
-                    <p class="star-value">9</p>
                 </button>
-                <button name="rate-value" type="submit" value="8">
+                <button class="rateBtn" name="rate-value" type="submit" value="8">
                     <i class="material-icons star-icon star8">star</i>
-                    <p class="star-value">8</p>
                 </button>
-                <button name="rate-value" type="submit" value="7">
+                <button class="rateBtn" name="rate-value" type="submit" value="7">
                     <i class="material-icons star-icon star7">star</i>
-                    <p class="star-value">7</p>
                 </button>
-                <button name="rate-value" type="submit" value="6">
+                <button class="rateBtn" name="rate-value" type="submit" value="6">
                     <i class="material-icons star-icon star6">star</i>
-                    <p class="star-value">6</p>
                 </button>
-                <button name="rate-value" type="submit" value="5">
+                <button class="rateBtn" name="rate-value" type="submit" value="5">
                     <i class="material-icons star-icon star5">star</i>
-                    <p class="star-value">5</p>
                 </button>
-                <button name="rate-value" type="submit" value="4">
+                <button class="rateBtn" name="rate-value" type="submit" value="4">
                     <i class="material-icons star-icon star4">star</i>
-                    <p class="star-value">4</p>
                 </button>
-                <button name="rate-value" type="submit" value="3">
+                <button class="rateBtn" name="rate-value" type="submit" value="3">
                     <i class="material-icons star-icon star3">star</i>
-                    <p class="star-value">3</p>
                 </button>
-                <button name="rate-value" type="submit" value="2">
+                <button class="rateBtn" name="rate-value" type="submit" value="2">
                     <i class="material-icons star-icon star2">star</i>
-                    <p class="star-value">2</p>
                 </button>
-                <button name="rate-value" type="submit" value="1">
+                <button class="rateBtn" name="rate-value" type="submit" value="1">
                     <i class="material-icons star-icon star1">star</i>
-                    <p class="star-value">1</p>
                 </button>
             </form>
         </div>
