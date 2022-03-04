@@ -1,19 +1,15 @@
-from django.db.models import Count, Sum, Avg
-from django.shortcuts import render, redirect
-from django.http import HttpResponse, HttpResponseRedirect
-from django.contrib.auth.forms import UserCreationForm
+import json
 
+from django.core.serializers.json import DjangoJSONEncoder
+from django.db.models import Count, Avg
+from django.shortcuts import render, redirect
+from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-
-from django.contrib.auth.views import LogoutView
 from .forms import LoginForm, RegisterForm
-
 from .models import Rate, Comment
 import requests
-import json
-
 from .classes import RankingGame, DetailGame
 
 
@@ -25,13 +21,13 @@ def home(request):
         login_form = LoginForm()
         register_form = RegisterForm()
         usernames = User.objects.values_list('username', flat=True)
+        usernames_json = json.dumps(list(usernames), cls=DjangoJSONEncoder)
         emails = User.objects.values_list('email', flat=True)
 
         context = {
             'login_form': login_form,
             'register_form': register_form,
-            'usernames': usernames,
-            'emails': emails
+            'usernames': usernames_json
         }
 
         return render(request, 'index.html', context)
@@ -47,15 +43,11 @@ def loginPage(request):
 
             if user is not None:
                 login(request=request, user=user)
-                # Redirect to a success page.
-                ...
                 messages.success(request, "Logged in succesfully.")
                 return redirect('home')
             else:
                 messages.error(request, "Incorrect username or password.")
                 return redirect('home')
-                # Return an 'invalid login' error message.
-                ...
     return render(request, 'index.html', {})
 
 def logoutView(request):

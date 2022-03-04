@@ -1,60 +1,5 @@
 $yellow: #ffeb3b
 
-header
-  width: 100%
-  position: relative
-
-  nav
-    height: 100px
-    line-height: 100px
-    box-shadow: none
-    top: 0
-    z-index: 1
-    transition: background-color .3s ease
-
-    ul
-      margin-right: 60px
-
-      li
-        width: 200px
-        text-align: center
-
-        a
-          transition: color .5s ease
-
-        .active
-          color: $yellow
-
-      li:hover:not(:last-child)
-        background-color: rgba(0, 0, 0, .4)
-
-      .btn-login
-        margin-left: 50px
-        width: 150px
-
-    .brand-logo
-      font-family: 'Staatliches', cursive
-      font-size: 2.5rem
-      margin-left: 60px
-      font-weight: 700
-      color: #fff
-      letter-spacing: 2px
-      transition: color .3s ease
-
-      i
-        float: none
-        font-size: 30px
-
-    .brand-logo:hover
-      color: $yellow
-
-  #dropdownAccount
-    a
-      color: #000
-      font-size: 1rem
-      text-align: right
-
-
 #section-content
   height: calc(100vh - 100px)
   width: 70%
@@ -132,7 +77,7 @@ header
       .btn-add-comment
         background: $yellow
 
-
+// ADDING RATE MODAL ----------------------------------------------
 #modalAddRate
   text-align: center
 
@@ -143,6 +88,7 @@ header
     display: flex
     flex-direction: row-reverse
     justify-content: center
+    counter-reset: rate-btn-counter 11
 
     button
       color: #1d1d1d
@@ -160,7 +106,22 @@ header
     button:hover, button:hover ~ button
       color: $yellow
 
+    .rateBtn
+      position: relative
+    .rateBtn::before
+      position: absolute
+      top: 55%
+      left: 50%
+      transform: translate(-50%, -55%)
+      font-size: 14px
+      font-weight: 700
+      color: #fff
+      counter-increment: rate-btn-counter -1
+      content: counter(rate-btn-counter)
+      cursor: pointer
 
+
+// ADDING COMMENT MODAL ----------------------------------------------
 #modalAddComment
   text-align: center
   h3
@@ -173,8 +134,3 @@ header
   .input-field .prefix.active
     color: #dd2c00
 
-
-.btn-yellow
-  color: #000
-  font: 400 1.2rem 'Staatliches', cursive
-  line-height: 54px

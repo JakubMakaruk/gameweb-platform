@@ -9,6 +9,7 @@
 
 {% block content %}
 <header id="home" class="scrollspy">
+    <!-- NAVBAR -->
     <nav class="transparent">
         <a href="#" class="brand-logo"><i class="fas fa-gamepad"></i> GAMEWEB</a>
         <ul class="right">
@@ -18,14 +19,13 @@
             {% if user.is_authenticated %}
             <li><a href="{% url 'forum' %}">Forum</a></li>
             {% endif %}
-            <li><a
-                    {% if user.is_authenticated %}
+            <li><a {% if user.is_authenticated %}
                         data-target="dropdownAccount"
                     {% else %}
                         href="#modalLoginRegister"
                     {% endif %}
                     class=" {% if user.is_authenticated %} dropdown-account {% endif %}
-                    btn-login btn-yellow waves-effect waves-light yellow btn-large modal-trigger">
+                    btn-login btn-yellow btn-large yellow waves-effect waves-light modal-trigger">
                 {% if user.is_authenticated %}
                     My account
                 {% else %}
@@ -35,6 +35,7 @@
         </ul>
     </nav>
 
+    <!-- MESSAGES -->
     {% for message in messages %}
     <div class="materialert {{ message.tags }}">
         <i class="material-icons">error_outline</i> <span>{{ message }}</span>
@@ -42,14 +43,15 @@
     </div>
     {% endfor %}
 
-
+    <!-- DROPDOWN ACCOUNT -->
     <ul id='dropdownAccount' class='dropdown-content'>
         <li><a href="#!">SETTINGS</a></li>
         <li class="divider" tabindex="-1"></li>
-        <li><a href="{% url 'logoutPage' %}">LOGOUT</a></li>
+        <li class="red lighten-2"><a href="{% url 'logoutPage' %}">LOGOUT</a></li>
     </ul>
 
     <div id="modalLoginRegister" class="modal">
+        <!-- LOGIN MODAL -->
         <div id="login-modal">
             <form action="{% url 'loginPage' %}" method="POST" id="loginForm">
                 {% csrf_token %}
@@ -71,11 +73,13 @@
                     <a class="switch-panel-text" onclick="switchPanel('register')">Click here to create new account</a>
                 </div>
                 <div class="modal-footer">
-                    <a class="modal-close waves-effect waves-red btn-flat btn-red">Back</a>
+                    <a class="modal-close waves-effect waves-red btn-flat btn-red" onclick="switchPanel('login')">Back</a>
                     <button type="submit" class="waves-effect waves-green btn-flat btn-green">Login</button>
                 </div>
             </form>
         </div>
+
+        <!-- REGISTER MODAL -->
         <div id="register-modal">
             <form action="{% url 'registerPage' %}" method="POST" id="registerForm">
                 {% csrf_token %}
@@ -103,9 +107,8 @@
                     <a class="switch-panel-text" onclick="switchPanel('login')">Return to sign in panel</a>
                 </div>
                 <div class="modal-footer">
-                    <a class="modal-close waves-effect waves-red btn-flat btn-red">Back</a>
-                    <button type="submit" class="waves-effect waves-green btn-flat btn-green">Create
-                    </button>
+                    <a class="modal-close waves-effect waves-red btn-flat btn-red " onclick="switchPanel('login')">Back</a>
+                    <button type="submit" class="waves-effect waves-green btn-flat btn-green">Create</button>
                 </div>
             </form>
         </div>
@@ -124,8 +127,7 @@
                     <img src="{% static 'images/slider-images/1.jpg' %}">
                 </div>
                 <div class="slide">
-                    <img
-                            src="{% static 'images/slider-images/2.jpg' %}">
+                    <img src="{% static 'images/slider-images/2.jpg' %}">
                 </div>
                 <div class="slide">
                     <img src="{% static 'images/slider-images/3.jpg' %}">
@@ -149,11 +151,11 @@
             <h1>EXPLORE</h1>
             <h1>GAMEWEB</h1>
         </div>
-        <a class="btn-start-explore btn-yellow waves-effect waves-light yellow btn-large">Start explore</a>
+        <a class="btn-start-explore btn-yellow yellow btn-large waves-effect waves-light">Start explore</a>
     </div>
 </header>
 
-<section id="section-aboutus" class=" scrollspy">
+<section id="section-aboutus" class="scrollspy">
     <div class="title">
         <p class="about-us-title">ABOUT US</p>
     </div>
@@ -534,6 +536,8 @@
         <p>Created by Jakub Makaruk. &copy; <span id="current-year"></span></p>
     </div>
 </footer>
+
+{{ usernames }}
 {% endblock content %}
 
 
@@ -552,24 +556,8 @@
 <script type="text/javascript" src="{% static 'js/login-register-swap-handler.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/alert-handler.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/forms-home-handler.js' %}"></script>
-<!--<script type="text/javascript">-->
-<!--    const usernamesUsers = "{{ usernames }}";-->
-<!--    const emailsUsers = "{{ emails }}";-->
-
-<!--    console.log(emailsUsers);-->
-
-<!--    document.querySelector('#loginRegister').addEventListener('onchange', () => {-->
-<!--        if (usernamesUsers.includes(this.value)) {-->
-<!--            console.log('wrong login');-->
-<!--        }-->
-<!--    })-->
-<!--    documnet.querySelector('#emailRegiste').addEventListener('onchange', () => {-->
-<!--        if (emailsUsers.includes(this.value)) {-->
-<!--            console.log('wrong email');-->
-<!--        }-->
-<!--    })-->
-<!--    document.querySelector('#repeatPasswordRegister').addEventListener('onchange', () => {-->
-<!--        if (this.value)-->
-<!--    })-->
-<!--</script>-->
+<script type="text/javascript">
+    // let a = {{ usernames|safe }};
+    // console.log(a);
+</script>
 {% endblock %}

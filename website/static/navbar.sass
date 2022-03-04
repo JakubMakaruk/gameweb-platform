@@ -1,0 +1,52 @@
+$yellow: #ffeb3b
+
+header
+  width: 100%
+  position: relative
+
+  nav
+    height: 100px
+    line-height: 100px
+    box-shadow: none
+    top: 0
+    z-index: 1
+    transition: background-color .3s ease
+    ul
+      margin-right: 60px
+      li
+        width: 200px
+        text-align: center
+        a
+          transition: color .5s ease
+
+        .active
+          color: $yellow
+
+      li:hover:not(:last-child)
+        background-color: rgba(0, 0, 0, .4)
+
+      .btn-login
+        margin-left: 50px
+        width: 150px
+
+    .brand-logo
+      font-family: 'Staatliches', cursive
+      font-size: 2.5rem
+      margin-left: 60px
+      font-weight: 700
+      color: #fff
+      letter-spacing: 2px
+      transition: color .3s ease
+
+      i
+        float: none
+        font-size: 30px
+
+    .brand-logo:hover
+      color: $yellow
+
+  #dropdownAccount
+    a
+      color: #000
+      font-size: 1rem
+      text-align: right
